@@ -179,9 +179,11 @@ console.log( 'The total number of purchases is:', numPurchases.length);
   HINT(S):
   - Don't forget that 'purchases' can also be made in 'cash'!
 */
-// const numCashSales;
+const numCashSales = transactions.filter(transaction =>
+  transaction.type ==='sale' && transaction.paymentMethod === 'cash'
+  );
 
-// console.log( 'The total number of cash sales is:', numCashSales );
+console.log( 'The total number of cash sales is:', numCashSales.length);
 
 
 // --------------------------------------------------
@@ -193,9 +195,11 @@ console.log( 'The total number of purchases is:', numPurchases.length);
   HINT(S):
   - Make sure to exclude any 'sales' made by 'credit'!
 */
-// const numCreditPurchases;
+const numCreditPurchases = transactions.filter(transaction =>
+  transaction.type === 'purchase' && transaction.paymentMethod === 'credit'
+  );
 
-// console.log( 'The total number of credit purchases is:', numCreditPurchases );
+console.log( 'The total number of credit purchases is:', numCreditPurchases.length);
 
 
 // --------------------------------------------------
@@ -210,10 +214,16 @@ console.log( 'The total number of purchases is:', numPurchases.length);
   - The assembled array should be made up of strings, not full `transaction` objects.
   - This array is allowed to contain duplicate values.
 */
-// const allVendors;
+const allVendors = []
+transactions.forEach(transaction => {
+  if (typeof transaction.vendor == "string") {
+    allVendors.push(transaction.vendor);
+  }
+}); 
 
-// console.log( 'The vendors are:', allVendors );
+console.log( 'The vendors are:', allVendors );
 
+// Note: Double check to see if there's a better way
 
 // --------------------------------------------------
 // QUESTION 06

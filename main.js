@@ -214,11 +214,11 @@ console.log( 'The total number of credit purchases is:', numCreditPurchases.leng
   - The assembled array should be made up of strings, not full `transaction` objects.
   - This array is allowed to contain duplicate values.
 */
-const allVendors = []
+const allVendors = [];
 transactions.forEach(transaction => {
   if (typeof transaction.vendor == "string") {
     allVendors.push(transaction.vendor);
-  }
+  };
 }); 
 
 console.log( 'The vendors are:', allVendors );
@@ -237,9 +237,15 @@ console.log( 'The vendors are:', allVendors );
   - The assembled array should be made up of strings, not full `transaction` objects.
   - Make sure that the resulting array *does not* include any duplicates.
 */
-// const uniqueCustomers;
+const uniqueCustomers = [];
+transactions.forEach(transaction => {
+  if (!uniqueCustomers.includes(transaction.customer) && typeof transaction.customer == "string") {
+    uniqueCustomers.push(transaction.customer);
+  };
+});
 
-// console.log( 'The unique customers are:', uniqueCustomers );
+
+console.log( 'The unique customers are:', uniqueCustomers );
 
 
 // --------------------------------------------------
@@ -255,9 +261,16 @@ console.log( 'The vendors are:', allVendors );
   - There may be more than 1 'sale' that includes 5 or more items.
   - Individual transactions do not have either `name` or `numItems` properties, we'll have to add them to the output.
 */
-// const bigSpenders;
+const bigSpenders = [];
 
-// console.log( 'The "big spenders" are:', bigSpenders );
+transactions.forEach(transaction => {
+  if (transaction.type == 'sale' && transaction.items.length >= 5) {
+    let customer = {name: `${transaction.customer}`, numItems: transaction.items.length}
+    bigSpenders.push(customer);
+  }
+})
+
+console.log( 'The "big spenders" are:', bigSpenders );
 
 
 // --------------------------------------------------
@@ -269,9 +282,11 @@ console.log( 'The vendors are:', allVendors );
   HINT(S):
   - Transactions don't have 'prices', but their 'items' do!
 */
-// const sumFirstSale;
+const sumFirstSale = transactions[0].items.reduce((accumulator, currentValue) => {
+  return accumulator + currentValue.price
+}, 0);
 
-// console.log( 'The sum of the first sale items is:', sumFirstSale );
+console.log( 'The sum of the first sale items is:', sumFirstSale );
 
 
 // --------------------------------------------------
@@ -285,9 +300,16 @@ console.log( 'The vendors are:', allVendors );
   - Make sure to include 'price' information from *all* purchases.
 */
 
-// const sumPurchases;
+let sumPurchases = 0
 
-// console.log( 'The sum of all purchases is:', sumPurchases );
+numPurchases.forEach(purchase => {
+  let currentPurchase = purchase.items.reduce((accumulator, currentValue) => {
+    return accumulator + currentValue.price;
+  }, 0);
+  sumPurchases = sumPurchases + currentPurchase 
+});
+
+console.log( 'The sum of all purchases is:', sumPurchases );
 
 
 // --------------------------------------------------

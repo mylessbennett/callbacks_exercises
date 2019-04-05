@@ -305,9 +305,9 @@ let sumPurchases = 0
 numPurchases.forEach(purchase => {
   let currentPurchase = purchase.items.reduce((accumulator, currentValue) => {
     return accumulator + currentValue.price;
-  }, 0);
+  }, 0)
   sumPurchases = sumPurchases + currentPurchase 
-});
+})
 
 console.log( 'The sum of all purchases is:', sumPurchases );
 
@@ -325,9 +325,20 @@ console.log( 'The sum of all purchases is:', sumPurchases );
   HINT(S):
   - Unlike 'QUESTION 08' and 'QUESTION 09', here we're interested in both 'sale' and 'purchase' transactions.
 */
-// const netProfit;
 
-// console.log( 'The net profit is:', netProfit );
+let sumSales = 0
+
+numSales.forEach(sale => {
+  let currentSale = sale.items.reduce((accumulator, currentValue) => {
+    return accumulator + currentValue.price;
+  }, 0);
+  sumSales = sumSales + currentSale
+}); 
+
+console.log(sumSales);
+
+const netProfit = sumSales + sumPurchases
+console.log( 'The net profit is:', netProfit );
 
 
 // --------------------------------------------------
@@ -339,9 +350,16 @@ console.log( 'The sum of all purchases is:', sumPurchases );
   HINTS:
   - The result of this calculation should be a number (not an array, object, or other data type).
 */
-// const mostItems;
+let mostItems = 0;
 
-// console.log( 'The most items sold in a single transaction is:', mostItems );
+bigSpenders.forEach(sale => {
+  currentNumItems = sale.numItems;
+  if (currentNumItems > mostItems) {
+    mostItems = currentNumItems;
+  };
+});
+
+console.log( 'The most items sold in a single transaction is:', mostItems );
 
 
 // --------------------------------------------------
@@ -350,6 +368,17 @@ console.log( 'The sum of all purchases is:', sumPurchases );
 /*
   Calculate the sum of the 'purchase' with the fewest items.
 */
-// const sumOfSmallestPurchase;
 
-// console.log( 'The sum of the smallest purchase is:', sumOfSmallestPurchase );
+let smallestPurchase = numPurchases[0];
+
+numPurchases.forEach(purchase => {
+  if (purchase.items.length < smallestPurchase.items.length) {
+    smallestPurchase = purchase
+  };
+});
+
+const sumOfSmallestPurchase = smallestPurchase.items.reduce((accumulator, currentValue) => {
+  return accumulator + currentValue.price;
+}, 0);
+
+console.log( 'The sum of the smallest purchase is:', sumOfSmallestPurchase );
